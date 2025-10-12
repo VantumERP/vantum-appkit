@@ -2,18 +2,18 @@ name: Publish NuGet package
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - "v*"
+    branches: [ main ]
+    tags: [ "v*" ]
 
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -23,16 +23,16 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Restore dependencies
+      - name: Restore
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build -c Release --no-restore
 
-      - name: Pack NuGet packages
-        run: dotnet pack --configuration Release --no-build -o ./artifacts
+      - name: Pack
+        run: dotnet pack -c Release --no-build -o ./artifacts
 
-      - name: Publish to GitHub Packages
+      - name: Push packages
         run: dotnet nuget push "./artifacts/*.nupkg" \
-             --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
-             --api-key ${{ secrets.GITHUB_TOKEN }}
+               --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+               --api-key ${{ secrets.GITHUB_TOKEN }}
