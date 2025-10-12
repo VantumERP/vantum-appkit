@@ -6,33 +6,28 @@ on:
     tags: [ "v*" ]
 
 jobs:
-  build-and-publish:
+  publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-          source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Restore
-        run: dotnet restore
-
-      - name: Build
-        run: dotnet build -c Release --no-restore
-
-      - name: Pack
-        run: dotnet pack -c Release --no-build -o ./artifacts
-
-      - name: Push packages
-        run: dotnet nuget push "./artifacts/*.nupkg" \
-               --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
-               --api-key ${{ secrets.GITHUB_TOKEN }}
+      - name: Auth to GitHub Packages
+        run: |
+          dotnet nuget remove source github || true
+          dotnet nuget add source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+            --name "github" \
+            --username "${{ github.actor }}" \
+            --password "${{ secrets.GITHUB_TOKEN }}" \
+            --store-password-in-clear-text
+      - run: dotnet restore
+      - run: dotnet build -c Release --no-restore
+      - run: dotnet pack -c Release --no-build -o artifacts
+      - name: Push nupkgs (skip duplicates)
+        shell: bash
+        run: |
+          shopt -s nullglob
+          for f in artifacts/*.nupkg; do
+            dotnet nuget push "$f" --source "github" --api-key "${{ secrets.GITHUB_TOKEN }}" --skip-duplicate
+          done
