@@ -1,0 +1,169 @@
+# ----------------------------
+# OS cruft
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# Build outputs
+# ----------------------------
+bin/
+obj/
+[Bb]uild/
+[Bb]ld/
+out/
+x64/
+x86/
+[Aa][Rr][Mm]*/
+[Ww][Ii][Nn]32/
+
+# Configuration-specific build dirs (just in case)
+Debug*/
+Release*/
+Releases/
+
+# dotnet CLI artifacts
+*.deps.json
+*.runtimeconfig.json
+*.dll
+*.exe
+*.pdb
+
+# ----------------------------
+# IDE / tooling
+# ----------------------------
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider / ReSharper
+.idea/
+*.sln.iml
+_ReSharper*/
+_ReSharper.Caches/
+*.DotSettings.user
+
+# VS Code (keep tasks/settings in repo only if you want)
+.vscode/
+
+# NCrunch
+*.ncrunch*
+*NCrunch_*
+.*crunch*.local.xml
+
+# ----------------------------
+# NuGet / packages
+# ----------------------------
+*.nupkg
+*.snupkg
+# Old-style packages folder (rare nowadays)
+packages/
+!packages/build/
+!packages/repositories.config
+
+# NuGet v3 cache (never commit)
+# (Global cache is outside repo, listed here for safety if present)
+.nuget/packages/
+
+# ----------------------------
+# Logs & diagnostics
+# ----------------------------
+*.log
+logs/
+TestResult*/
+TestResults/
+*.coverage
+*.coveragexml
+coverage*/
+coverage.*.xml
+*.opencover.xml
+*.trx
+*.svclog
+
+# dotCover / dotTrace / dotMemory
+*.dotCover
+*.dotMemory
+*.dotTrace
+
+# ----------------------------
+# ASP.NET Core / settings
+# ----------------------------
+# Keep appsettings.json and appsettings.Development.json in source control.
+# Ignore local-only overrides:
+appsettings.*.local.json
+appsettings.local.json
+
+# Azure Functions local settings
+local.settings.json
+
+# IIS Express
+iisexpress/
+.vs/Config/applicationhost.config
+
+# User secrets (stored outside repo by default, included here for safety)
+secrets.json
+
+# ----------------------------
+# Publishing & artifacts
+# ----------------------------
+artifacts/
+**/publish/
+*.pubxml
+*.pubxml.user
+**/Properties/PublishProfiles/*
+
+# ----------------------------
+# Certificates / keys (never commit secrets)
+# ----------------------------
+*.pfx
+*.p12
+*.key
+*.cer
+*.snk
+
+# ----------------------------
+# Databases
+# ----------------------------
+# SQL Server
+*.mdf
+*.ldf
+*.ndf
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# ----------------------------
+# Frontend bits that sometimes live in backend solutions
+# (Uncomment if applicable)
+# ----------------------------
+# node_modules/
+# dist/
+# wwwroot/lib/
+# libman.cache
+
+# ----------------------------
+# Misc / temp
+# ----------------------------
+*.tmp
+*.temp
+*.bak
+*.orig
+~$*
+*.swp
+*.swo
+*.tgz
+
+# ----------------------------
+# Environment files
+# ----------------------------
+.env
+.env.*
+!.env.example
+
+
+src/Main/appsettings.json
+react-client/bun.lock

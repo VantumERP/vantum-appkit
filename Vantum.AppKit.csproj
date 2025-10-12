@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Target framework -->
+    <TargetFrameworks>net10.0;netstandard2.1</TargetFrameworks>
+
+    <!-- Compiler & language options -->
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- NuGet packaging -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Vantum.AppKit</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Adnan Crnovršanin</Authors>
+    <Company>Actaer</Company>
+    <Description>Core attributes and interfaces for Vantum ERP modular app system.</Description>
+    <RepositoryUrl>https://github.com/VantumERP/vantum-appkit</RepositoryUrl>
+
+    <!-- AGPL License -->
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
+
+    <!-- Symbols and debugging info -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <!-- Optional metadata -->
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>vantum;erp;modular;appkit;attributes;manifest;source-generator</PackageTags>
+
+    <!-- Treat warnings as errors in production builds -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+    <!-- Publish output -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
+  </PropertyGroup>
+
+</Project>
