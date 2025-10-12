@@ -50,26 +50,17 @@ jobs:
       - name: Pack
         run: dotnet pack -c Release --no-build -o artifacts
       
-      - name: Auth to GitHub Packages
-        run: |
-          dotnet nuget remove source github || true
-          dotnet nuget add source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
-            --name "github" \
-            --username "${{ github.actor }}" \
-            --password "${{ secrets.GITHUB_TOKEN }}" \
-            --store-password-in-clear-text
-      
-      - name: Push packages to GitHub Packages
+      - name: Push packages to NuGet.org
         shell: bash
         run: |
           shopt -s nullglob
-          # Push both .nupkg and .snupkg files
+          # Push both .nupkg and .snupkg files to NuGet.org
           for f in artifacts/*.nupkg artifacts/*.snupkg; do
             if [ -f "$f" ]; then
-              echo "Pushing $f..."
+              echo "Pushing $f to NuGet.org..."
               dotnet nuget push "$f" \
-                --source "github" \
-                --api-key "${{ secrets.GITHUB_TOKEN }}" \
+                --source https://api.nuget.org/v3/index.json \
+                --api-key "${{ secrets.NUGET_API_KEY }}" \
                 --skip-duplicate
             fi
           done
