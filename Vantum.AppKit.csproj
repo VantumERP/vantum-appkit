@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- Target framework -->
-    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net10.0;net8.0;netstandard2.1</TargetFrameworks>
 
     <!-- Compiler & language options -->
     <LangVersion>preview</LangVersion>
@@ -15,7 +15,8 @@
     <Version>0.1.0</Version>
     <Authors>Adnan Crnovršanin</Authors>
     <Company>Actaer</Company>
-    <Description>Core attributes and interfaces for Vantum ERP modular app system.</Description>
+    <Description>Core attributes and interfaces for Vantum ERP modular app system with support for
+      Pattern B (auto-inference from MVC attributes).</Description>
     <RepositoryUrl>https://github.com/VantumERP/vantum-appkit</RepositoryUrl>
 
     <!-- AGPL License -->
@@ -27,7 +28,7 @@
 
     <!-- Optional metadata -->
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageTags>vantum;erp;modular;appkit;attributes;manifest;source-generator</PackageTags>
+    <PackageTags>vantum;erp;modular;appkit;attributes;manifest;source-generator;auto-inference</PackageTags>
 
     <!-- Treat warnings as errors in production builds -->
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
