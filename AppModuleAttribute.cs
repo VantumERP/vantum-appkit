@@ -1,30 +1,16 @@
 namespace Vantum.AppKit;
 
 /// <summary>
-/// Marks a class as a module anchor. Each module should have exactly one anchor class
-/// that defines the module's metadata. The generator will scan for this attribute to
-/// discover modules and their associated controllers/routes.
+/// Marks a class as a module anchor. Each module should have exactly one anchor class.
+/// The Vantum CLI will scan for this attribute to discover modules and their associated controllers/routes.
+/// Basic module metadata (name, displayName, description, version) should be defined in the manifest.json
+/// created via 'vantum create-app' command. This attribute is optional and used primarily for code documentation.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, Inherited = false)]
 public sealed class AppModuleAttribute : Attribute
 {
     /// <summary>
-    /// Unique identifier for the module (e.g., "Contacts", "Inventory").
+    /// Optional: module identifier. If not provided, CLI will infer from directory/manifest.
     /// </summary>
-    public string Name { get; init; } = "";
-
-    /// <summary>
-    /// Human-readable display name for the module.
-    /// </summary>
-    public string DisplayName { get; init; } = "";
-
-    /// <summary>
-    /// Semantic version of the module (e.g., "1.2.3").
-    /// </summary>
-    public string Version { get; init; } = "0.1.0";
-
-    /// <summary>
-    /// Optional description of the module's functionality.
-    /// </summary>
-    public string? Description { get; init; }
+    public string? Name { get; init; }
 }

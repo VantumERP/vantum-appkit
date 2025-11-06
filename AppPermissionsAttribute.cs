@@ -2,9 +2,11 @@ namespace Vantum.AppKit;
 
 /// <summary>
 /// Declares module-level permissions. Apply to the module anchor class to define
-/// all permissions that the module provides.
+/// all permissions that the module provides. These will be extracted by the Vantum CLI
+/// and added to the manifest's permissions.scopes[] array.
+/// Note: Permissions on routes (via [AppRouteAuto]) are also auto-extracted.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public sealed class AppPermissionsAttribute : Attribute
 {
     /// <summary>
