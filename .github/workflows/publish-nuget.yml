@@ -2,8 +2,8 @@ name: Publish NuGet package
 
 on:
   push:
-    tags: [ "v*.*.*" ]  # Only trigger on version tags (e.g., v0.1.0)
-  workflow_dispatch:  # Allow manual triggering
+    tags: ["v*.*.*"] # Only trigger on version tags (e.g., v0.1.0)
+  workflow_dispatch: # Allow manual triggering
 
 jobs:
   publish:
@@ -11,16 +11,16 @@ jobs:
     permissions:
       packages: write
       contents: read
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'  # Using .NET 8 LTS (update when net10.0 is released)
-      
+          dotnet-version: "10.0.x" # Using .NET 10
+
       - name: Extract version from tag
         id: version
         shell: bash
@@ -29,27 +29,27 @@ jobs:
           VERSION=${GITHUB_REF#refs/tags/v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Publishing version: $VERSION"
-      
+
       - name: Update project version
         shell: bash
         run: |
           # Update the version in the .csproj file
           sed -i "s/<Version>.*<\/Version>/<Version>${{ steps.version.outputs.version }}<\/Version>/" Vantum.AppKit.csproj
           cat Vantum.AppKit.csproj | grep -A 2 -B 2 "<Version>"
-      
+
       - name: Restore dependencies
         run: dotnet restore
-      
+
       - name: Build
         run: dotnet build -c Release --no-restore
-      
+
       - name: Run tests (if any)
         run: dotnet test -c Release --no-build --verbosity normal || echo "No tests found"
         continue-on-error: true
-      
+
       - name: Pack
         run: dotnet pack -c Release --no-build -o artifacts
-      
+
       - name: Push packages to NuGet.org
         shell: bash
         run: |
@@ -64,7 +64,7 @@ jobs:
                 --skip-duplicate
             fi
           done
-      
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
