@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- Target framework -->
-    <TargetFrameworks>net10.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net9.0;netstandard2.1</TargetFrameworks>
 
     <!-- Compiler & language options -->
     <LangVersion>preview</LangVersion>
