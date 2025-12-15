@@ -12,7 +12,7 @@
     <!-- NuGet packaging -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Vantum.AppKit</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.8</Version>
     <Authors>Adnan Crnovršanin</Authors>
     <Company>Actaer</Company>
     <Description>Core attributes and interfaces for Vantum ERP modular app system with support for
